@@ -131,7 +131,7 @@ print(cm)
 library(caret)
 confusionMatrix(y_pred, test_set$Liked)
 ```
-ROC-AUC Evaluation
+## ROC-AUC Evaluation
 ```R
 Step 11: # Install and load the pROC package for AUC
 # install.packages('pROC')
@@ -161,4 +161,5 @@ varImpPlot(classifier, main = 'Feature Importance Plot')
 # Step 13: Visualizing Random Forest Results
 # Plotting the out-of-bag error rate to see if more trees help reduce error
 plot(classifier, main = "Error Rate vs. Number of Trees")
-```
+```![575c34be-f11b-40fd-a1b3-666dd44e9d2f](https://github.com/user-attachments/assets/46e7f3e6-d82a-416a-8fe3-12d44c7f19c8)
+
