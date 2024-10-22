@@ -21,10 +21,30 @@ dataset_original = read.delim('D:\\R Projects\\Restaurant_Reviews.tsv', quote = 
 #Step 2: EDA
 #Check the dataset structure
 str(dataset_original)
+```
+The dataset dataset_original is a data frame with 1000 observations (rows) and 2 variables (columns):
 
+Review (chr): This column contains textual reviews of restaurants. Each review is stored as a character string (chr), where customers express their thoughts about the restaurant (e.g., "Wow... Loved this place.", "Crust is not good.").
+
+Liked (int): This column is a binary indicator representing whether the customer liked the restaurant or not. It is an integer value:
+
+1 means the customer liked the restaurant (positive review).
+0 means the customer did not like the restaurant (negative review).
+
+In summary, the dataset captures customer sentiments toward restaurants through textual reviews and corresponding binary labels that indicate whether the review was positive or negative.
+## Data Pre-Processing
+
+```R
 # Checking the distribution of the target variable ('Liked')
 table(dataset_original$Liked)
+```
+Result:
 
+500 reviews have a Liked value of 0, meaning these are negative reviews.
+500 reviews have a Liked value of 1, meaning these are positive reviews.
+This result indicates a perfectly balanced dataset, with an equal number of positive and negative reviews (500 each). This balance is beneficial for training classification models, as it avoids bias toward one class.
+
+```R
 # Plotting the distribution of 'Liked' variable
 library(ggplot2)
 ggplot(dataset_original, aes(x = as.factor(Liked))) +
@@ -44,7 +64,6 @@ set.seed(123)
 wordcloud(names(word_freq), freq = word_freq, max.words = 100, colors = brewer.pal(8, 'Dark2'))
 ```
 
-## Data Pre-Processing
 ```R
 # Step 3: Text Preprocessing and Cleaning
 # Loading required libraries for text cleaning
@@ -161,5 +180,5 @@ varImpPlot(classifier, main = 'Feature Importance Plot')
 # Step 13: Visualizing Random Forest Results
 # Plotting the out-of-bag error rate to see if more trees help reduce error
 plot(classifier, main = "Error Rate vs. Number of Trees")
-```![575c34be-f11b-40fd-a1b3-666dd44e9d2f](https://github.com/user-attachments/assets/46e7f3e6-d82a-416a-8fe3-12d44c7f19c8)
+```
 
