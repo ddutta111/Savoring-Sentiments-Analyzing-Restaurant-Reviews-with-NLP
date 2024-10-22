@@ -1,11 +1,22 @@
 # Savoring-Sentiments-Analyzing-Restaurant-Reviews-with-NLP
 
+## Model Overview:
+
+In this project, we developed a Random Forest classification model for Natural Language Processing (NLP) to analyze restaurant performance based on customer reviews. By leveraging customer feedback, our model aims to accurately predict whether a review is positive or negative, providing valuable insights into customer sentiments. The model employs various text preprocessing techniques to clean and prepare the data, followed by feature extraction using a Bag of Words approach. With a robust evaluation strategy, including confusion matrices and ROC-AUC analysis, we ensure a comprehensive assessment of the model's performance. This approach enables restaurant owners to better understand customer perceptions and enhance their service offerings.
+
+## Dataset Description
+
+The dataset used in this project is the restaurant_reviews.tsv file, sourced from the Maven Analytics available datasets. This collection contains a variety of customer reviews for different restaurants, encompassing a range of sentiments. Each entry in the dataset includes text reviews along with a binary label indicating whether the review is positive or negative. This structured data serves as the foundation for our Natural Language Processing (NLP) model, enabling us to analyze customer opinions and assess restaurant performance effectively.
+
+Statistical software used is R.
+
+## Imorting the dataset
 ```R
 # Step 1: Importing the dataset
 dataset_original = read.delim('D:\\R Projects\\Restaurant_Reviews.tsv', quote = '', 
                               stringsAsFactors = FALSE)
 ```
-Exploratory Data Analysis
+## Exploratory Data Analysis
 ```R
 #Step 2: EDA
 #Check the dataset structure
@@ -33,7 +44,7 @@ set.seed(123)
 wordcloud(names(word_freq), freq = word_freq, max.words = 100, colors = brewer.pal(8, 'Dark2'))
 ```
 
-Data Pre-Processing
+## Data Pre-Processing
 ```R
 # Step 3: Text Preprocessing and Cleaning
 # Loading required libraries for text cleaning
@@ -58,7 +69,7 @@ corpus <- tm_map(corpus, removeWords, stopwords())
 # Applying stemming to get root words (e.g., "loved" becomes "love")
 corpus <- tm_map(corpus, stemDocument)
 ```
-Bag Of Words Model Creation 
+## Bag Of Words Model Creation 
 ```R
 # Step 4: Creating the Bag of Words model
 dtm <- DocumentTermMatrix(corpus)  # Creating a document-term matrix (word frequency table)
@@ -73,16 +84,16 @@ dataset$Liked <- dataset_original$Liked
 # Removing extra white spaces
 corpus <- tm_map(corpus, stripWhitespace)
 ```
-Encoding Categorical Feature
+## Encoding Categorical Feature
 ```R
 # Step 5: Encoding the target feature as a factor
 dataset$Liked <- factor(dataset$Liked, levels = c(0, 1))
 # Explanation: The 'Liked' column is encoded as a factor with two levels: 0 (negative review) and 1 (positive review).
 ```
-Spillting the Dataset into training and test set
 
-# Step 6: Splitting the dataset into the Training set and Test set
+## Spillting the Dataset into training and test set
 ```R
+#Step 6: Splitting Dataset for model validation 
 library(caTools)
 set.seed(123)  # Setting a random seed for reproducibility
 split <- sample.split(dataset$Liked, SplitRatio = 0.8)  # 80% Training, 20% Test
@@ -90,7 +101,7 @@ split <- sample.split(dataset$Liked, SplitRatio = 0.8)  # 80% Training, 20% Test
 training_set <- subset(dataset, split == TRUE)  # Training set
 test_set <- subset(dataset, split == FALSE)     # Test set
 ```
-Randomforest Classification Model
+## Randomforest Classification Model
 ```R
 # Step 7: Fitting Random Forest Classification to the Training set
 library(randomForest)
@@ -102,14 +113,14 @@ classifier <- randomForest(x = training_set[-692],  # All columns except the tar
 # Summary of the Random Forest model
 print(classifier)
 ```
-Prediction on Test Set
+## Prediction on Test Set
 ```R
 # Step 8: Predicting the Test set results
 y_pred <- predict(classifier, newdata = test_set[-692])
 print(y_pred)
 # Explanation: The trained Random Forest model is used to predict the 'Liked' label for the test set.
 ```
-Confusion Matrix & Model Evaluation
+## Confusion Matrix & Model Evaluation
 ```R
 # Step 9: Making the Confusion Matrix
 cm <- table(test_set[, 692], y_pred)
@@ -141,7 +152,7 @@ print(paste("AUC:", auc_value))
 # Displaying the AUC
 auc(roc_curve)
 ```
-Random Forest Model Feature Importance and Visualizing RF result
+## Random Forest Model Feature Importance and Visualizing RF result
 ```R
 # Step 12: Random Forest Model Feature Importance
 importance <- importance(classifier)
