@@ -62,6 +62,8 @@ This graph is a bar plot showing the distribution of restaurant reviews categori
 
 Both bars have roughly the same height, indicating that there is a nearly equal number of positive (liked) and negative (not liked) reviews, with approximately 500 reviews in each category. This balanced distribution is useful for training machine learning models, as it avoids bias toward one class.
 
+Data Checking
+
 ```R
 # Checking word frequency before cleaning
 install.packages('wordcloud')
@@ -80,6 +82,7 @@ The "word cloud" visualizes the frequency of words in restaurant reviews, with l
 
 This type of word cloud can provide a high-level overview of the most talked-about aspects of a restaurant, though further NLP techniques such as sentiment analysis would be needed for deeper insights.
 
+Data Cleaning
 ```R
 # Step 3: Text Preprocessing and Cleaning
 # Loading required libraries for text cleaning
