@@ -1,4 +1,4 @@
-# Savoring-Sentiments-Analyzing-Restaurant-Reviews-with-NLP
+# Savoring-Sentiments-Analyzing-Restaurant-Reviews-with-NLP_R
 
 ## Model Overview:
 
